@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=US-ASCII" http-equiv="Content-Type" />
+
+  <title>File: README.rdoc [RDoc Documentation]</title>
+
+  <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+  <script src="./js/jquery.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/thickbox-compressed.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/quicksearch.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/darkfish.js" type="text/javascript"
+    charset="utf-8"></script>
+</head>
+
+<body class="file">
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+      </div>
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="./README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="./images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li><a href="./Elephant.html">Elephant</a></li>
+        
+          <li><a href="./Elephant/Cache.html">Elephant::Cache</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div id="documentation">
+    
+<h1>Overview</h1>
+
+<p><a href="Elephant.html">Elephant</a> provides a caching module that may be
+included into a class for easy internal caching.  The code for this is
+simple, but is common enough of a design pattern that having a reusable
+module is handy.</p>
+
+<p>Usage is quite simple:</p>
+<ol><li>
+<p>include <a href="Elephant/Cache.html">Elephant::Cache</a>.</p>
+</li><li>
+<p>In your object's initialize method, call <tt>initialize_cache</tt>.</p>
+</li><li>
+<p>Create accessors for cachable quantities, using the <tt>cache</tt> method.</p>
+</li></ol>
+
+<p>Example:</p>
+
+<pre>class Point
+
+  def initialize(x=0, y=0)
+    initialize_cache
+    self.x = x
+    self.y = y
+  end
+
+  attr_reader :x, :y
+
+  def magnitude
+    return cache(__method__) do
+      Math.sqrt(self.x**2 + self.y**2)
+    end
+  end
+
+end</pre>
+
+<p>Additionally, if you were to make the point mutable, you'd want to dirty
+the cache like so:</p>
+
+<pre>def x=(value)
+  diry_cache(:magnitude)
+  self.x = x
+end
+
+def y=(value)
+  dirty_cache(:magnitude)
+  self.y = y
+end</pre>
+
+<p>Or, if you want to dirty the entire cache, call <tt>dirty_cache()</tt>.</p>
+
+<p>See the <a href="Elephant/Cache.html">Elephant::Cache</a> module for more
+information.</p>
+
+<h1>Contact</h1>
+
+<p>If you have any questions, comments, concerns, patches, or bugs, you can
+contact me via the github repository at:</p>
+
+<p><a href="http://github.com/paploo/elephant">github.com/paploo/elephant</a></p>
+
+<p>or directly via e-mail at:</p>
+
+<p><a href="mailto:jeff@paploo.net">jeff@paploo.net</a></p>
+
+<h1>Version History</h1>
+<dl class="rdoc-list"><dt>1.0.0 - 2011-Aug-28</dt>
+<dd>
+<p>Initial release.</p>
+</dd></dl>
+
+  </div>
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
+</body>
+</html>
+

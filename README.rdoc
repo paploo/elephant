@@ -1,0 +1,63 @@
+= Overview
+
+Elephant provides a caching module that may be included into a class for easy
+internal caching.  The code for this is simple, but is common enough of a design
+pattern that having a reusable module is handy.
+
+Usage is quite simple:
+
+1. include Elephant::Cache.
+2. In your object's initialize method, call +initialize_cache+.
+3. Create accessors for cachable quantities, using the +cache+ method.
+
+Example:
+
+ class Point
+
+   def initialize(x=0, y=0)
+     initialize_cache
+     self.x = x
+     self.y = y
+   end
+
+   attr_reader :x, :y
+
+   def magnitude
+     return cache(__method__) do
+       Math.sqrt(self.x**2 + self.y**2)
+     end
+   end
+
+ end
+
+Additionally, if you were to make the point mutable, you'd want to dirty the
+cache like so:
+
+ def x=(x)
+   dirty_cache(:magnitude)
+   @x = x
+ end
+
+ def y=(y)
+   dirty_cache(:magnitude)
+   @y = y
+ end
+
+Or, if you want to dirty the entire cache, call <code>dirty_cache()</code> with
+no arguments.
+
+See the Elephant::Cache module for more information.
+
+= Contact
+
+If you have any questions, comments, concerns, patches, or bugs, you can contact
+me via the github repository at:
+
+http://github.com/paploo/elephant
+
+or directly via e-mail at:
+
+mailto:jeff@paploo.net
+
+= Version History
+[1.0.0 - 2011-Aug-28] Initial release.
