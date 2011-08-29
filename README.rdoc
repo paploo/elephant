@@ -23,7 +23,7 @@ Example:
    attr_reader :x, :y
 
    def magnitude
-     return cache(__method__) do
+     return cache_value(__method__) do
        Math.sqrt(self.x**2 + self.y**2)
      end
    end
