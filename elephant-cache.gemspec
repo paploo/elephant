@@ -7,7 +7,7 @@ end
 
 Gem::Specification.new do |s|
   s.name = 'elephant-cache'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   
   s.required_ruby_version = '>= 1.8.7'
   

@@ -33,7 +33,14 @@ module Elephant
     #  end
     def cache_value(key)
       unless(@elephant_cache.include?(key))
+        start_at = Time.now
         @elephant_cache[key] = yield if block_given?
+        stop_at = Time.now
+        delta_t = stop_at - start_at
+        if( Elephant.time? )
+          label = "#{self.class.name} - #{key}"
+          Elephant.time_io.puts " -- #{label.to_s.rjust(32)}: #{('%0.3f' % (delta_t*1000.0)).rjust(9)} ms (#{caller[0]})"
+        end
       end
       return @elephant_cache[key]
     end

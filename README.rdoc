@@ -60,6 +60,7 @@ or directly via e-mail at:
 mailto:jeff@paploo.net
 
 = Version History
-[1.0.1 - 2011-???-??] Minor updates.
+[1.0.1 - 2011-Sep-01] Added timing.
+                      * (FEATURE) Added the ability to turn on cache calculation timing output.
                       * (FIX) Some documentation referred to +cache_value+ as +cache+.
 [1.0.0 - 2011-Aug-28] Initial release.
